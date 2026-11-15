@@ -72,6 +72,7 @@ def main():
                 if f.endswith(".md"):
                     rel = os.path.relpath(os.path.join(dp, f), SK).replace(os.sep, "/")
                     guides[rel] = open(os.path.join(dp, f), encoding="utf-8").read()
+    guides = dict(sorted(guides.items()))  # filesystem order differs between machines
     dump(os.path.join(OUT, "guides.json"), guides)
     dump(os.path.join(OUT, "manifest.json"), {"version": version, "laws": laws, "rulings": rulings, "guides": sorted(guides)})
     shutil.copy(os.path.join(ROOT, "portable", "system-prompt-mini.md"), os.path.join(OUT, "system-prompt.md"))
