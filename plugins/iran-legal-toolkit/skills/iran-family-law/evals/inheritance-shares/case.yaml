@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: inheritance-shares
+expected_outcome: |
+  Correct shares (wife 1/8 including from house value, sons twice daughter) with arithmetic and the practical steps.

@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: custody-after-divorce
+expected_outcome: |
+  Correct custody rules after age 7, remarriage, relocation ban, and court-centred best-interest framing.

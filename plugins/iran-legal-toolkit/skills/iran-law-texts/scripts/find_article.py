@@ -5,13 +5,15 @@ Usage:
   find_article.py <law> <number> [<number> ...]   e.g.  find_article.py cpc 49 50
   find_article.py <law> --search "<phrase>"       e.g.  find_article.py tazirat --search "خیانت در امانت"
   find_article.py --list
-Law keys: ipc, tazirat, cpc, labor-procedure, councils
+Law keys: civil, family, ipc, tazirat, cpc, labor-procedure, councils
 """
 import os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REF = os.path.join(HERE, "..", "references")
 LAWS = {
+    "civil": "civil-code.md",
+    "family": "family-protection-1391.md",
     "ipc": "islamic-penal-code-1392.md",
     "tazirat": "tazirat-1375.md",
     "cpc": "criminal-procedure-code-1392.md",
