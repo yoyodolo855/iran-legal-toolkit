@@ -5,7 +5,7 @@ Usage:
   find_article.py <law> <number> [<number> ...]   e.g.  find_article.py cpc 49 50
   find_article.py <law> --search "<phrase>"       e.g.  find_article.py tazirat --search "خیانت در امانت"
   find_article.py --list
-Law keys: civil, civil-procedure, family, labor, cheque, lease-1376, lease-1376-reg, lease-1362, lease-1356, financial-judgments, civil-enforcement, transfer-anothers-property, registration-mandate, councils-full, reduction-1399, registration, computer-crimes, unemployment-insurance, deeds-regulation, administrative-court, commercial-code, joint-stock-1347, housing-1403, pre-sale, pre-sale-reg, registration-reg, fraud-1367, consumer, third-party-insurance, social-security, direct-taxes, ipc, tazirat, cpc, labor-procedure, councils
+Law keys: civil, civil-procedure, family, labor, cheque, lease-1376, lease-1376-reg, lease-1362, lease-1356, financial-judgments, civil-enforcement, transfer-anothers-property, registration-mandate, councils-full, reduction-1399, registration, computer-crimes, unemployment-insurance, deeds-regulation, administrative-court, commercial-code, joint-stock-1347, housing-1403, pre-sale, pre-sale-reg, registration-reg, fraud-1367, consumer, third-party-insurance, social-security, direct-taxes, sodagari-1404, ipc, tazirat, cpc, labor-procedure, councils
 """
 import os, re, sys
 
@@ -43,6 +43,7 @@ LAWS = {
     "third-party-insurance": "third-party-insurance-1395.md",
     "social-security": "social-security-1354.md",
     "direct-taxes": "direct-taxes.md",
+    "sodagari-1404": "sodagari-1404.md",
     "ipc": "islamic-penal-code-1392.md",
     "tazirat": "tazirat-1375.md",
     "cpc": "criminal-procedure-code-1392.md",
