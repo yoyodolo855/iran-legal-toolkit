@@ -42,6 +42,8 @@ def main(argv):
         for name, b in blocks():
             head = norm(b.split("\n", 1)[0])
             if re.search(r"(?<![۰-۹/])" + re.escape(key) + r"(?![۰-۹/])", head):
+                if len(b) > 8000:
+                    b = b[:8000] + f"\n…[بقیه بریده شد؛ {len(b) - 8000} نویسهٔ دیگر]"
                 print(f"[{name}]\n{b}\n")
                 return 0
         print("not found")
@@ -51,9 +53,17 @@ def main(argv):
         rest = argv[1:]
         if "--max" in rest:
             i = rest.index("--max")
-            mx = int(rest[i + 1])
+            try:
+                mx = int(rest[i + 1])
+            except (IndexError, ValueError):
+                print("--max needs a number", file=sys.stderr)
+                return 2
+            mx = max(1, min(mx, 50))
             rest = rest[:i] + rest[i + 2:]
-        words = [norm(w) for w in rest]
+        words = [norm(w)[:200] for w in rest if w.strip()]
+        if not words:
+            print("--search needs at least one word", file=sys.stderr)
+            return 2
         hits = 0
         for name, b in blocks():
             nb = norm(b)

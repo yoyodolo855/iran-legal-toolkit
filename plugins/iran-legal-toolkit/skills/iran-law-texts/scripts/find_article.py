@@ -5,7 +5,7 @@ Usage:
   find_article.py <law> <number> [<number> ...]   e.g.  find_article.py cpc 49 50
   find_article.py <law> --search "<phrase>"       e.g.  find_article.py tazirat --search "خیانت در امانت"
   find_article.py --list
-Law keys: civil, civil-procedure, family, labor, cheque, lease-1376, lease-1376-reg, lease-1362, lease-1356, financial-judgments, civil-enforcement, transfer-anothers-property, registration-mandate, councils-full, reduction-1399, registration, computer-crimes, unemployment-insurance, deeds-regulation, administrative-court, commercial-code, housing-1403, pre-sale, pre-sale-reg, registration-reg, fraud-1367, consumer, third-party-insurance, social-security, ipc, tazirat, cpc, labor-procedure, councils
+Law keys: civil, civil-procedure, family, labor, cheque, lease-1376, lease-1376-reg, lease-1362, lease-1356, financial-judgments, civil-enforcement, transfer-anothers-property, registration-mandate, councils-full, reduction-1399, registration, computer-crimes, unemployment-insurance, deeds-regulation, administrative-court, commercial-code, housing-1403, pre-sale, pre-sale-reg, registration-reg, fraud-1367, consumer, third-party-insurance, social-security, direct-taxes, ipc, tazirat, cpc, labor-procedure, councils
 """
 import os, re, sys
 
@@ -41,6 +41,7 @@ LAWS = {
     "consumer": "consumer-protection-1388.md",
     "third-party-insurance": "third-party-insurance-1395.md",
     "social-security": "social-security-1354.md",
+    "direct-taxes": "direct-taxes.md",
     "ipc": "islamic-penal-code-1392.md",
     "tazirat": "tazirat-1375.md",
     "cpc": "criminal-procedure-code-1392.md",
@@ -48,6 +49,7 @@ LAWS = {
     "councils": "dispute-councils-1402-art12.md",
 }
 FA = str.maketrans("0123456789", "۰۱۲۳۴۵۶۷۸۹")
+LAT = str.maketrans("۰۱۲۳۴۵۶۷۸۹", "0123456789")
 
 
 def load(key):
@@ -74,18 +76,31 @@ def main(argv):
     notice = [l for l in head.splitlines() if l.startswith("> **")]
     if notice:
         print("\n".join(notice[:2]) + "\n")
-    if len(argv) >= 3 and argv[1] == "--search":
-        q = argv[2]
-        hits = [a for a in arts if q in a]
+    if len(argv) < 2:
+        print("give an article number or --search \"<phrase>\"", file=sys.stderr)
+        return 2
+    if argv[1] == "--search":
+        if len(argv) < 3 or not argv[2].strip():
+            print("--search needs a phrase", file=sys.stderr)
+            return 2
+        q = argv[2].translate(FA).replace("ي", "ی").replace("ك", "ک")[:200]
+        hits = [a for a in arts if q in a.translate(FA)]
         for a in hits[:15]:
             title = a.splitlines()[0]
-            i = a.find(q)
+            i = a.translate(FA).find(q)
             print(f"{title}: …{a[max(0, i - 80):i + 120].strip()}…\n")
         print(f"[{len(hits)} match(es)]")
         return 0
     found = False
     for n in argv[1:]:
-        num = n.translate(FA)
+        num = n.translate(FA).strip()
+        if not re.fullmatch(r"[۰-۹]{1,4}", num):
+            print(f"not an article number: {n!r}", file=sys.stderr)
+            continue
+        if key == "computer-crimes" and int(num.translate(LAT)) <= 55:
+            alt = str(int(num.translate(LAT)) + 728).translate(FA)
+            print(f"(مادهٔ {num} قانون جرایم رایانه‌ای = مادهٔ {alt} تعزیرات)\n")
+            num = alt
         want = f"## مادهٔ {num}"
         for a in arts:
             first = a.splitlines()[0].strip()

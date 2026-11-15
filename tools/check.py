@@ -6,6 +6,9 @@
 3. Privacy: no personal names or e-mail addresses besides the maintainer handle.
 4. Portable edition is up to date with the plugin source.
 5. Law texts: article headings are in order and the lookup script works.
+6. Citations: every article the guides cite exists in the full law texts.
+7. Scripts: lookup tools reject path traversal and bad input without crashing.
+8. Privacy: no phone numbers, card numbers or IBANs in the content.
 """
 import json, os, re, subprocess, sys, tempfile, filecmp
 
@@ -38,6 +41,7 @@ def check_structure():
 
 HIDDEN = {0x202A, 0x202B, 0x202C, 0x202D, 0x202E, 0x2066, 0x2067, 0x2068, 0x2069, 0x200B, 0x200E, 0x200F, 0xFEFF, 0x2060}
 INJECT = re.compile(r"ignore (all|previous|the above)|disregard (all|previous)|you are now|system prompt override|<script|BEGIN (RSA|OPENSSH|PGP)|api[_-]?key\s*[:=]|password\s*[:=]", re.I)
+PERSONAL = re.compile(r"(?<!\d)(?:\+98|0)9\d{9}(?!\d)|(?<!\d)(?:\d{4}[ -]){3}\d{4}(?!\d)|\bIR\d{24}\b")
 PRIVACY = re.compile(r"(?<![/\w])[\w.+-]+@[\w-]+\.[a-z]{2,}\b", re.I)
 ALLOWED_MAIL = ("noreply.github.com",)
 
@@ -60,6 +64,8 @@ def check_safety():
             if rel != os.path.join("tools", "check.py"):
                 for m in INJECT.finditer(t):
                     err(f"{rel}: suspicious text '{m.group(0)}'")
+                for m in PERSONAL.finditer(t.translate(str.maketrans("۰۱۲۳۴۵۶۷۸۹", "0123456789"))):
+                    err(f"{rel}: possible phone/card/IBAN number ({m.group(0)})")
                 for m in PRIVACY.finditer(t):
                     if not m.group(0).endswith(ALLOWED_MAIL):
                         err(f"{rel}: e-mail address found ({m.group(0)})")
@@ -111,10 +117,47 @@ def check_laws():
         err("find_article.py failed on a known article (cpc 49)")
 
 
+def check_citations():
+    r = subprocess.run([sys.executable, "-I", os.path.join(ROOT, "tools", "audit_citations.py")], capture_output=True, text=True)
+    if r.returncode != 0:
+        for line in r.stdout.splitlines()[:20]:
+            err("citation: " + line)
+
+
+def check_scripts():
+    s = os.path.join(PLUGIN, "skills", "iran-law-texts", "scripts")
+    cases = [
+        (["find_article.py", "../../etc/passwd", "1"], 2),
+        (["find_article.py", "civil", "abc"], 1),
+        (["find_article.py", "civil", "--search"], 2),
+        (["find_ruling.py", "--search"], 2),
+        (["find_ruling.py", "--search", "x", "--max", "abc"], 2),
+        (["find_ruling.py", "--number", "../../etc/passwd"], 1),
+    ]
+    for args, want in cases:
+        r = subprocess.run([sys.executable, "-I", os.path.join(s, args[0])] + args[1:], capture_output=True, text=True, timeout=30)
+        if r.returncode != want or "Traceback" in r.stderr:
+            err(f"script robustness: {' '.join(args)} gave exit {r.returncode}")
+    r = subprocess.run([sys.executable, "-I", os.path.join(s, "find_ruling.py"), "--number", "799"], capture_output=True, text=True)
+    if "سرقت" not in r.stdout:
+        err("find_ruling.py failed on a known ruling (799)")
+    known = [
+        (["find_article.py", "computer-crimes", "13"], "۷۴۱"),       # old numbering maps to tazirat
+        (["find_article.py", "reduction-1399", "--search", "۶۷۴"], "مادهٔ ۱۱"),  # mixed digits in source
+        (["find_article.py", "civil", "1173"], "تربیت اخلاقی"),
+    ]
+    for args, want in known:
+        r = subprocess.run([sys.executable, "-I", os.path.join(s, args[0])] + args[1:], capture_output=True, text=True, timeout=30)
+        if want not in r.stdout:
+            err(f"known lookup failed: {' '.join(args)}")
+
+
 if __name__ == "__main__":
     check_structure()
     check_safety()
     check_laws()
+    check_citations()
+    check_scripts()
     check_portable()
     check_dist()
     if errors:
