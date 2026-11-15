@@ -5,7 +5,7 @@ Usage:
   find_article.py <law> <number> [<number> ...]   e.g.  find_article.py cpc 49 50
   find_article.py <law> --search "<phrase>"       e.g.  find_article.py tazirat --search "خیانت در امانت"
   find_article.py --list
-Law keys: civil, civil-procedure, family, labor, cheque, ipc, tazirat, cpc, labor-procedure, councils
+Law keys: civil, civil-procedure, family, labor, cheque, lease-1376, lease-1376-reg, lease-1362, lease-1356, ipc, tazirat, cpc, labor-procedure, councils
 """
 import os, re, sys
 
@@ -17,6 +17,10 @@ LAWS = {
     "civil-procedure": "civil-procedure-code-1379.md",
     "labor": "labor-code-1369.md",
     "cheque": "cheque-law.md",
+    "lease-1376": "landlord-tenant-1376.md",
+    "lease-1376-reg": "landlord-tenant-1376-regulation.md",
+    "lease-1362": "landlord-tenant-1362.md",
+    "lease-1356": "landlord-tenant-1356.md",
     "ipc": "islamic-penal-code-1392.md",
     "tazirat": "tazirat-1375.md",
     "cpc": "criminal-procedure-code-1392.md",
