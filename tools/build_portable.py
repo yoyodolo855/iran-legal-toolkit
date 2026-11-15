@@ -15,7 +15,7 @@ ORDER = ["iran-legal-core", "iran-civil-litigation", "iran-criminal-procedure",
          "iran-contracts-deeds", "iran-labor-law", "iran-law-texts"]
 FA = str.maketrans("0123456789", "۰۱۲۳۴۵۶۷۸۹")
 
-HEAD = """# جعبه‌ابزار حقوقی ایران – نسخهٔ قابل حمل ({ver})
+HEAD = """# جعبه‌ابزار حقوقی ایران، نسخهٔ قابل حمل ({ver})
 
 تاریخ اعتبار اطلاعات: آبان ۱۴۰۵. این فایل برای هر مدل هوش مصنوعی قابل استفاده است.
 

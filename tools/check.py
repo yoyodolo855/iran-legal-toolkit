@@ -51,7 +51,7 @@ def check_safety():
             try:
                 t = open(p, encoding="utf-8").read()
             except UnicodeDecodeError:
-                if not f.endswith((".png", ".jpg", ".ico", ".woff2")):
+                if not f.endswith((".png", ".jpg", ".ico", ".woff2", ".zip", ".plugin")):
                     err(f"{rel}: not UTF-8 text")
                 continue
             bad = {hex(ord(c)) for c in t if ord(c) in HIDDEN}
@@ -78,6 +78,18 @@ def check_portable():
             err("portable edition was out of date (rebuilt now; commit the result)")
 
 
+def check_dist():
+    names = ["iran-legal-toolkit.plugin", "iran-legal-toolkit-portable.md", "laws.zip"]
+    before = {}
+    for n in names:
+        p = os.path.join(ROOT, "dist", n)
+        before[n] = open(p, "rb").read() if os.path.exists(p) else None
+    subprocess.run([sys.executable, "-I", os.path.join(ROOT, "tools", "build_dist.py")], check=True, capture_output=True)
+    for n in names:
+        if open(os.path.join(ROOT, "dist", n), "rb").read() != before[n]:
+            err(f"dist/{n} was out of date (rebuilt now; commit the result)")
+
+
 def check_laws():
     d = os.path.join(PLUGIN, "skills", "iran-law-texts")
     for f in os.listdir(os.path.join(d, "references")):
@@ -95,6 +107,7 @@ if __name__ == "__main__":
     check_safety()
     check_laws()
     check_portable()
+    check_dist()
     if errors:
         print("FAILED:")
         for e in errors:
