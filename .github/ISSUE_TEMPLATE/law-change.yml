@@ -1,0 +1,30 @@
+name: گزارش تغییر قانون
+description: قانونی تغییر کرده یا مبلغی (مثل حداقل مزد) به‌روز شده است
+title: "[تغییر قانون] "
+labels: ["تغییر قانون"]
+body:
+  - type: input
+    id: law
+    attributes:
+      label: کدام قانون یا مقرره؟
+      placeholder: مثلاً مادهٔ ۱۰۴ قانون مجازات اسلامی
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: چه چیزی تغییر کرده؟
+      description: متن جدید یا خلاصهٔ تغییر را بنویسید.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: منبع رسمی
+      description: نشانی روزنامهٔ رسمی، سامانهٔ ملی قوانین یا سایت رسمی دیگر
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: تاریخ تصویب یا ابلاغ

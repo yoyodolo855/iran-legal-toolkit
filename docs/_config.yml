@@ -1,0 +1,7 @@
+title: جعبه‌ابزار حقوقی ایران
+description: ابزار حقوقی رایگان و آزاد برای نوشتن دادخواست، شکواییه، لایحه و قرارداد با کمک هوش مصنوعی
+lang: fa
+repo_url: https://github.com/yoyodolo855/iran-legal-toolkit
+markdown: kramdown
+kramdown:
+  input: GFM

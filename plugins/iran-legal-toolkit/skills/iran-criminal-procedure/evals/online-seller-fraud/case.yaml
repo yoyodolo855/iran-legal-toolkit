@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: online-seller-fraud
+expected_outcome: |
+  Drafts a correct شکواییه for (computer) fraud with evidence guidance.

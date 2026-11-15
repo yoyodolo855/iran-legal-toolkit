@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: wage-1405-calculation
+expected_outcome: |
+  Gives correct 1405 figures and shows the shortfall.

@@ -1,0 +1,29 @@
+name: پاسخ یا متن اشتباه
+description: مدل با این بسته پاسخ یا متن حقوقی نادرستی داد
+title: "[خطا] "
+labels: ["خطا"]
+body:
+  - type: markdown
+    attributes:
+      value: "لطفاً هیچ اطلاعات شخصی (نام، کد ملی، نشانی، شمارهٔ پرونده) ننویسید."
+  - type: textarea
+    id: question
+    attributes:
+      label: پرسش یا درخواست شما (بدون اطلاعات شخصی)
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: کجای پاسخ اشتباه بود؟
+    validations:
+      required: true
+  - type: textarea
+    id: correct
+    attributes:
+      label: پاسخ درست چیست و منبعش کجاست؟
+  - type: dropdown
+    id: model
+    attributes:
+      label: با کدام مدل؟
+      options: [Claude, ChatGPT, Gemini, Grok, دیگر]

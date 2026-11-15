@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="{{ '/' | relative_url }}">⚖️ {{ site.title }}</a>
+    <nav>
+      <a href="{{ '/start.html' | relative_url }}">شروع</a>
+      <a href="{{ '/examples.html' | relative_url }}">نمونه درخواست‌ها</a>
+      <a href="{{ '/faq.html' | relative_url }}">پرسش‌های رایج</a>
+      <a href="{{ site.repo_url }}">کد و دانلود</a>
+    </nav>
+  </header>
+  <main>
+    {{ content }}
+  </main>
+  <footer>
+    رایگان، آزاد و بدون کپی‌رایت. این ابزار جای وکیل را نمی‌گیرد؛ متن‌ها را پیش از ثبت با دقت بخوانید.
+  </footer>
+</body>
+</html>

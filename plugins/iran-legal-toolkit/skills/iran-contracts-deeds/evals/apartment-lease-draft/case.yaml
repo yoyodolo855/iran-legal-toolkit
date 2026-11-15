@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: apartment-lease-draft
+expected_outcome: |
+  Drafts a complete lease protecting the landlord's eviction route.
