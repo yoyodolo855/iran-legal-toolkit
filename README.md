@@ -8,7 +8,9 @@
 
 [![بررسی خودکار](https://github.com/yoyodolo855/iran-legal-toolkit/actions/workflows/check.yml/badge.svg)](https://github.com/yoyodolo855/iran-legal-toolkit/actions/workflows/check.yml)
 
-📥 **دانلود:** [فایل اصلی برای ChatGPT، Gemini و Grok](https://github.com/yoyodolo855/iran-legal-toolkit/raw/main/dist/iran-legal-toolkit-portable.md) · [متن کامل قوانین](https://github.com/yoyodolo855/iran-legal-toolkit/raw/main/dist/laws.zip) · [پلاگین Claude](https://github.com/yoyodolo855/iran-legal-toolkit/raw/main/dist/iran-legal-toolkit.plugin)
+📥 **دانلود:** [اسکیل برای Claude، Gemini، ChatGPT، Grok و ...](https://github.com/yoyodolo855/iran-legal-toolkit/raw/main/dist/iran-legal-toolkit-skill.zip) · [فایل اصلی برای هر هوش مصنوعی](https://github.com/yoyodolo855/iran-legal-toolkit/raw/main/dist/iran-legal-toolkit-portable.md) · [متن کامل قوانین](https://github.com/yoyodolo855/iran-legal-toolkit/raw/main/dist/laws.zip) · [پلاگین Claude](https://github.com/yoyodolo855/iran-legal-toolkit/raw/main/dist/iran-legal-toolkit.plugin)
+
+🧩 **[راهنمای نصب روی هر هوش مصنوعی](INSTALL.md)** (Claude، ChatGPT، Gemini، Grok، Perplexity، Mistral، Copilot، Qwen، DeepSeek، Meta AI و مدل‌های محلی)
 
 📖 **راهنمای ساده برای همه:** [سایت پروژه](https://yoyodolo855.github.io/iran-legal-toolkit/)
 
@@ -17,6 +19,12 @@
 ## 🆕 تازه‌ها
 
 هر بار چیزی به بسته اضافه شود، اینجا نوشته می‌شود. فهرست کامل تغییرها در [فهرست تغییرات](CHANGELOG.md) است.
+
+**نسخهٔ ۰٫۲۵٫۰ (آبان ۱۴۰۵)**
+- 🧩 **نصب روی همهٔ هوش مصنوعی‌ها:** بستهٔ اسکیل تازه (ZIP) برای Claude، Gemini، ChatGPT، Grok، Perplexity، Mistral Vibe و Copilot؛ نسخهٔ سبک زیر ۱۰۰ فایل؛ فایل قابل حمل سبک برای DeepSeek، Meta AI و چت‌های دیگر. [راهنمای نصب](INSTALL.md)
+- 🔌 **سرور MCP:** برای Claude Desktop، Cursor، VS Code، LM Studio، Jan و مدل‌های محلی Ollama. مدل فقط همان ماده‌ای را می‌خواند که لازم دارد
+- ⚡ **کم‌مصرف‌تر:** راهنماها از ۱۴۶ به ۸۴ کیلوبایت رسید؛ جزئیات به فایل‌های جدا رفت و فقط وقتی لازم است خوانده می‌شود
+- 🧹 **متن قوانین تمیزتر:** ۲۰ قانون از PDF رسمی دوباره ساخته شد (کلمه‌های چسبیده و نیم‌فاصله‌ها درست شد)؛ ترتیب بندهای مادهٔ ۱۲ قانون مالیات بر ارزش افزوده و یک پانویس جابه‌جا در مادهٔ ۱۰ قانون مدنی اصلاح شد
 
 **نسخهٔ ۰٫۲۴٫۰ (آبان ۱۴۰۵)**
 - 🏢 **قانون تملک آپارتمان‌ها از نسخهٔ رسمی:** متن سایت قوانین جایگزین شد؛ تاریخ اصلاح هر ماده و شمارهٔ درست تبصره‌های مادهٔ ۱۰ مکرر حالا معلوم است

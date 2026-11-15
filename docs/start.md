@@ -5,13 +5,17 @@ title: شروع
 
 # راهنمای قدم‌به‌قدم
 
+> 🧩 **تازه:** اگر هوش مصنوعی شما بخش «Skills» دارد (Claude، Gemini، ChatGPT کاری، Grok، Perplexity، Mistral، Copilot)، [بستهٔ اسکیل](https://github.com/yoyodolo855/iran-legal-toolkit/raw/main/dist/iran-legal-toolkit-skill.zip) را نصب کنید؛ ساده‌تر و دقیق‌تر است. Gems در Gemini کنار گذاشته شده و GPTهای سفارشی ChatGPT هم به‌زودی کنار می‌روند. [راهنمای نصب برای هر هوش مصنوعی](https://github.com/yoyodolo855/iran-legal-toolkit/blob/main/INSTALL.md)
+
 ## ۱. فایل‌ها را بگیرید
 
 روی نام فایل بزنید تا دانلود شود:
 
 | فایل | برای چه؟ |
 |------|----------|
+| [iran-legal-toolkit-skill.zip](https://github.com/yoyodolo855/iran-legal-toolkit/raw/main/dist/iran-legal-toolkit-skill.zip) | بستهٔ اسکیل برای هوش مصنوعی‌هایی که بخش Skills دارند |
 | [iran-legal-toolkit-portable.md](https://github.com/yoyodolo855/iran-legal-toolkit/raw/main/dist/iran-legal-toolkit-portable.md) | فایل اصلی برای ChatGPT، Gemini، Grok و هر هوش مصنوعی دیگر |
+| [iran-legal-toolkit-lite.md](https://github.com/yoyodolo855/iran-legal-toolkit/raw/main/dist/iran-legal-toolkit-lite.md) | فایل سبک (۸۰ کیلوبایت) برای چت‌هایی که فایل بزرگ نمی‌پذیرند |
 | [laws.zip](https://github.com/yoyodolo855/iran-legal-toolkit/raw/main/dist/laws.zip) | متن کامل چند قانون (اختیاری، برای نقل دقیق ماده) |
 | [iran-legal-toolkit.plugin](https://github.com/yoyodolo855/iran-legal-toolkit/raw/main/dist/iran-legal-toolkit.plugin) | فقط برای Claude |
 

@@ -2,6 +2,20 @@
 
 # فهرست تغییرات
 
+## نسخهٔ ۰٫۲۵٫۰ (آبان ۱۴۰۵)
+
+- **بسته‌های چندسکویی:** `tools/build_universal.py` دو ZIP می‌سازد: `iran-legal-toolkit-skill.zip` (کامل، ۱۳۵ فایل) و `iran-legal-toolkit-skill-lite.zip` (۱۰۰ فایل، ۳۴ قانون پرکاربرد). هر دو یک `SKILL.md` در ریشه دارند (راهنماها با نام `GUIDE.md` زیر `guides/`) و مسیرها خودکار بازنویسی می‌شود
+- **`plugin.json` (استاندارد Agent Plugins 1.0)** کنار `.claude-plugin/plugin.json`؛ و **`AGENTS.md`** برای Codex، Cursor، Copilot و ابزارهای دیگر
+- **سرور MCP (`mcp/server.py`):** بدون وابستگی، هفت ابزار (`list_laws`، `get_articles`، `search_law`، `get_ruling`، `search_rulings`، `list_guides`، `read_guide`)؛ راهنمای اتصال در `mcp/README.md`
+- **`INSTALL.md`:** راهنمای نصب برای Claude، ChatGPT، Gemini، Grok، Perplexity، Mistral Vibe، Microsoft Copilot، Qwen، DeepSeek، Meta AI، Kimi، LM Studio، Jan و Ollama
+- **فایل قابل حمل سبک** (`iran-legal-toolkit-lite.md`، حدود ۸۰ کیلوبایت) و **`portable/system-prompt-mini.md`** برای مدل‌های کم‌حافظه
+- **داده‌های چت آزمایشی:** `tools/build_web_data.py` پوشهٔ `docs/data/` را می‌سازد (هر قانون و هر فایل آرا جدا، ماده‌به‌ماده)؛ طرح در `docs/CHATBOX-PLAN.md`
+- **کاهش توکن:** `iran-law-texts/SKILL.md` به یک راهنمای کوتاه تبدیل شد و جدول‌ها به `references/INDEX.md` رفت؛ راهنماهای ملک و خانواده هم به فایل‌های جدا تقسیم شد. حجم کل SKILL.mdها: ۱۴۶ ← ۸۴ کیلوبایت
+- **بازسازی متن ۲۰ قانون از PDF رسمی** با بازچینی تکه‌های پله‌ای، اصلاح نیم‌فاصله و کلمه‌های چسبیده؛ بدون حذف یا تکرار ماده (بررسی خودکار)
+- **اصلاح‌ها:** ترتیب بندهای ۵ تا ۷ مادهٔ ۱۲ قانون مالیات بر ارزش افزوده؛ پانویس مادهٔ ۲ که در مادهٔ ۱۰ قانون مدنی افتاده بود جدا شد؛ نویز OCR در آیین‌نامهٔ دادرسی کار و قانون ثبت پاک شد
+- **`find_article.py`:** در بستهٔ سبک، برای قانونی که نیست پیام روشن می‌دهد؛ `--list` عنوان هر قانون را هم نشان می‌دهد
+- **`check.py`:** بررسی بسته‌های ZIP (یک SKILL.md، سقف ۱۰۰ فایل، توضیح زیر ۱۰۲۴ نویسه)، یکسانی نسخه در سه جا، و به‌روز بودن `docs/data`
+
 ## نسخهٔ ۰٫۲۴٫۰ (آبان ۱۴۰۵)
 
 - **`apartment-ownership-1343.md`:** با نسخهٔ چاپی qavanin.ir جایگزین شد (تاریخ اصلاح هر ماده؛ تبصره‌های ۱ تا ۵ مادهٔ ۱۰ مکرر با شمارهٔ درست)

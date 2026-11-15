@@ -1,0 +1,11 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "iran-legal-toolkit",
+  "version": "0.25.0",
+  "description": "Free Iranian legal toolkit for people without a lawyer: court petitions, criminal complaints, briefs, contracts, labor, family and inheritance, property and lease, deadlines and jurisdiction, with full statute texts and unification rulings. جعبه‌ابزار حقوقی رایگان ایران.",
+  "author": {"name": "yoyodolo", "url": "https://github.com/yoyodolo855"},
+  "homepage": "https://github.com/yoyodolo855/iran-legal-toolkit",
+  "repository": "https://github.com/yoyodolo855/iran-legal-toolkit",
+  "license": "CC-BY-4.0",
+  "keywords": ["iran", "law", "legal", "persian", "farsi", "court", "contract", "labor-law", "family-law"]
+}

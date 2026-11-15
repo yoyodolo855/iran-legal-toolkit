@@ -106,12 +106,21 @@ def main(argv):
         return 0
     if argv[0] == "--list":
         for k, v in LAWS.items():
-            print(f"{k}\t{v}")
+            try:
+                with open(os.path.join(REF, v), encoding="utf-8") as fh:
+                    title = fh.readline().lstrip("# ").strip()
+            except OSError:
+                continue  # not in this package (lite build)
+            print(f"{k}\t{title}")
         return 0
     key = argv[0]
     if key not in LAWS:
         print(f"unknown law '{key}'. Use --list.", file=sys.stderr)
         return 2
+    if not os.path.isfile(os.path.join(REF, LAWS[key])):
+        print(f"law '{key}' ({LAWS[key]}) is not in this package. Full text: the full package "
+              "iran-legal-toolkit-skill.zip, or https://qavanin.ir", file=sys.stderr)
+        return 3
     head, arts = load(key)
     notice = [l for l in head.splitlines() if l.startswith("> **")]
     if notice:

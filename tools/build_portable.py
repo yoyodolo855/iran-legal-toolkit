@@ -4,6 +4,7 @@
 Run from anywhere:  python3 tools/build_portable.py
 Writes:
   portable/iran-legal-toolkit-portable.md   all skills and references, without full law texts
+  portable/iran-legal-toolkit-lite.md       only the nine main guides (no references): for chats with small context
   portable/laws/*.md                         full law texts, one file per law (optional extra knowledge files)
 """
 import json, os, re, shutil, sys
@@ -67,6 +68,14 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     with open(os.path.join(OUT, "iran-legal-toolkit-portable.md"), "w", encoding="utf-8") as fh:
         fh.write("".join(parts))
+    lite = [HEAD.format(ver=ver.translate(FA).replace(".", "٫")).replace("نسخهٔ قابل حمل", "نسخهٔ سبک قابل حمل", 1)
+            + "\n> نسخهٔ سبک: فقط راهنماهای اصلی در این فایل است. هر جا به فایل `references/...` ارجاع شده و آن بخش این‌جا نیست، "
+              "قاعدهٔ کلی همان راهنما را به کار ببر و به کاربر بگو برای جزئیات، نسخهٔ کامل (iran-legal-toolkit-portable.md) را بارگذاری کند.\n"]
+    for skill in ORDER:
+        t = strip_frontmatter(open(os.path.join(PLUGIN, "skills", skill, "SKILL.md"), encoding="utf-8").read(), skill)
+        lite.append(f"\n# FILE: {skill}/SKILL.md\n\n{demote(t).strip()}\n")
+    with open(os.path.join(OUT, "iran-legal-toolkit-lite.md"), "w", encoding="utf-8") as fh:
+        fh.write("".join(lite))
     laws_out = os.path.join(OUT, "laws")
     shutil.rmtree(laws_out, ignore_errors=True)
     os.makedirs(laws_out)

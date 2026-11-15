@@ -96,8 +96,55 @@ def _content(p):
     return open(p, "rb").read()
 
 
+def check_web_data():
+    """docs/data (for the in-browser chat) must match the current skills."""
+    out = os.path.join(ROOT, "docs", "data")
+    snap = {}
+    for dp, _, fs in os.walk(out):
+        for f in fs:
+            p = os.path.join(dp, f)
+            snap[os.path.relpath(p, out)] = open(p, "rb").read()
+    subprocess.run([sys.executable, "-I", os.path.join(ROOT, "tools", "build_web_data.py")], check=True, capture_output=True)
+    now = {}
+    for dp, _, fs in os.walk(out):
+        for f in fs:
+            p = os.path.join(dp, f)
+            now[os.path.relpath(p, out)] = open(p, "rb").read()
+    if snap != now:
+        err("docs/data was out of date (rebuilt now; commit the result)")
+
+
+def check_universal():
+    """Universal skill zips: one SKILL.md at the top, valid name/description, lite under 100 files;
+    both plugin manifests carry the same version."""
+    import zipfile
+    for n, cap in (("iran-legal-toolkit-skill.zip", None), ("iran-legal-toolkit-skill-lite.zip", 100)):
+        p = os.path.join(ROOT, "dist", n)
+        if not os.path.isfile(p):
+            err(f"dist/{n} missing")
+            continue
+        names = zipfile.ZipFile(p).namelist()
+        if cap and len(names) > cap:
+            err(f"dist/{n}: {len(names)} files, limit {cap}")
+        skills = [x for x in names if x.endswith("SKILL.md")]
+        if skills != ["iran-legal-toolkit/SKILL.md"]:
+            err(f"dist/{n}: expected one SKILL.md at iran-legal-toolkit/, found {skills}")
+        if any(x.endswith(".pyc") or "/." in x for x in names):
+            err(f"dist/{n}: hidden or compiled files inside")
+        head = zipfile.ZipFile(p).read("iran-legal-toolkit/SKILL.md").decode("utf-8")
+        m = re.search(r"^description: (.+)$", head, re.M)
+        if not m or len(m.group(1)) > 1024:
+            err(f"dist/{n}: description missing or over 1024 characters")
+    v1 = json.load(open(os.path.join(ROOT, "plugins", "iran-legal-toolkit", ".claude-plugin", "plugin.json"), encoding="utf-8"))["version"]
+    v2 = json.load(open(os.path.join(ROOT, "plugins", "iran-legal-toolkit", "plugin.json"), encoding="utf-8"))["version"]
+    srv = re.search(r'VERSION = "([^"]+)"', open(os.path.join(ROOT, "plugins", "iran-legal-toolkit", "mcp", "server.py"), encoding="utf-8").read())
+    if not (v1 == v2 == (srv.group(1) if srv else None)):
+        err(f"version mismatch: .claude-plugin {v1}, plugin.json {v2}, mcp/server.py {srv and srv.group(1)}")
+
+
 def check_dist():
-    names = ["iran-legal-toolkit.plugin", "iran-legal-toolkit-portable.md", "laws.zip"]
+    names = ["iran-legal-toolkit.plugin", "iran-legal-toolkit-portable.md", "iran-legal-toolkit-lite.md", "laws.zip",
+             "iran-legal-toolkit-skill.zip", "iran-legal-toolkit-skill-lite.zip"]
     before = {n: _content(os.path.join(ROOT, "dist", n)) for n in names}
     subprocess.run([sys.executable, "-I", os.path.join(ROOT, "tools", "build_dist.py")], check=True, capture_output=True)
     for n in names:
@@ -197,6 +244,8 @@ if __name__ == "__main__":
     check_scripts()
     check_portable()
     check_dist()
+    check_universal()
+    check_web_data()
     if errors:
         print("FAILED:")
         for e in errors:
