@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: old-cheque-late-damages
+expected_outcome: |
+  Cites unification ruling 883 (1405/7/21): damages run from the cheque date even for non-merchants and 5+ years do not bar them; index-based per art 522; civil claim route, not criminal (time-barred criminal complaint).

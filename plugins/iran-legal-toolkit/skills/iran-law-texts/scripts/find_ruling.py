@@ -8,7 +8,10 @@ Usage:
   find_ruling.py --list
 Words may be typed with Persian or Latin digits.
 """
-import glob, os, re, sys
+import glob, os, re, signal, sys
+
+if hasattr(signal, "SIGPIPE"):
+    signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DIR = os.path.join(HERE, "..", "rulings")
@@ -19,6 +22,14 @@ def norm(s):
     s = s.translate(FA).replace("ي", "ی").replace("ك", "ک").replace("‌", " ")
     return re.sub(r"\s+", " ", s)
 
+
+
+_LMAP = str.maketrans({"أ": "ا", "إ": "ا", "آ": "ا", "ة": "ه", "ؤ": "و", "ئ": "ی", "ي": "ی", "ك": "ک", "\u0654": None, "\u064b": None, "\u064c": None, "\u064d": None, "\u064e": None, "\u064f": None, "\u0650": None, "\u0651": None, "\u0652": None, "\u0640": None})
+
+
+def loose(s):
+    """Spacing- and spelling-tolerant form for searching: ignores spaces, half-spaces and hamza/diacritic variants."""
+    return re.sub(r"[\s\u200c\u200f\u200e]+", "", s.translate(FA).translate(_LMAP))
 
 def blocks():
     for path in sorted(glob.glob(os.path.join(DIR, "*.md"))):
@@ -60,13 +71,13 @@ def main(argv):
                 return 2
             mx = max(1, min(mx, 50))
             rest = rest[:i] + rest[i + 2:]
-        words = [norm(w)[:200] for w in rest if w.strip()]
+        words = [loose(w)[:200] for w in rest if w.strip()]
         if not words:
             print("--search needs at least one word", file=sys.stderr)
             return 2
         hits = 0
         for name, b in blocks():
-            nb = norm(b)
+            nb = loose(b)
             if all(w in nb for w in words):
                 hits += 1
                 if hits <= mx:

@@ -1,4 +1,4 @@
 schema_version: "1.1"
-name: request-insurance-record
+name: permit-followup-letter
 expected_outcome: |
   Official follow-up letter with full standard structure, Persian digits, پیرو reference, clear deadline request.

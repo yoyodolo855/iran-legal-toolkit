@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: capital-gains-home-sale
+expected_outcome: |
+  Uses the 1404 sodagari law: tax only after the executive platform is announced; no flat 10%; second home not exempt; holding under one year means top art-131 rate plus 10 points; inflation part deducted; property bought before platform exempt until 3 years after.

@@ -152,11 +152,48 @@ def check_scripts():
             err(f"known lookup failed: {' '.join(args)}")
 
 
+FA = str.maketrans("۰۱۲۳۴۵۶۷۸۹", "0123456789")
+
+
+def check_crossrefs():
+    """Every ruling number, law key and cross-skill file named in a guide must exist."""
+    skills = os.path.join(PLUGIN, "skills")
+    rul_dir = os.path.join(skills, "iran-law-texts", "rulings")
+    have = set()
+    for f in os.listdir(rul_dir):
+        if f.startswith("supreme-court-unification"):
+            for m in re.finditer(r"^## رأی وحدت رویهٔ ([۰-۹]+)", open(os.path.join(rul_dir, f), encoding="utf-8").read(), re.M):
+                have.add(int(m.group(1).translate(FA)))
+    src = open(os.path.join(skills, "iran-law-texts", "scripts", "find_article.py"), encoding="utf-8").read()
+    keys = set(re.findall(r'^\s+"([a-z0-9-]+)": "[\w.-]+\.md"', src, re.M))
+    known_missing = {843}
+    for dp, dn, fn in os.walk(skills):
+        if "/rulings" in dp or dp.endswith("iran-law-texts/references") or "/evals" in dp:
+            continue
+        for f in fn:
+            if not f.endswith(".md"):
+                continue
+            p = os.path.join(dp, f)
+            rel = os.path.relpath(p, ROOT)
+            t = open(p, encoding="utf-8").read()
+            for m in re.finditer(r"(?:رأی|آرای|آراء)(?: وحدت رویهٔ?)?(?: شمارهٔ?)? ([۰-۹]{3})(?![۰-۹/])", t):
+                n = int(m.group(1).translate(FA))
+                if 700 <= n <= 900 and n not in have and n not in known_missing and n > 716:
+                    err(f"{rel}: cites unification ruling {n} that is not in the rulings files")
+            for m in re.finditer(r"کلید(?:های)? `([a-z0-9-]+)`", t):
+                if m.group(1) not in keys:
+                    err(f"{rel}: unknown law key `{m.group(1)}`")
+            for m in re.finditer(r"`(iran-[a-z-]+)/((?:references|rulings|scripts)/[\w.-]+)`", t):
+                if not os.path.exists(os.path.join(skills, m.group(1), m.group(2))):
+                    err(f"{rel}: missing cross-reference {m.group(1)}/{m.group(2)}")
+
+
 if __name__ == "__main__":
     check_structure()
     check_safety()
     check_laws()
     check_citations()
+    check_crossrefs()
     check_scripts()
     check_portable()
     check_dist()

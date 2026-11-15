@@ -5,9 +5,12 @@ Usage:
   find_article.py <law> <number> [<number> ...]   e.g.  find_article.py cpc 49 50
   find_article.py <law> --search "<phrase>"       e.g.  find_article.py tazirat --search "خیانت در امانت"
   find_article.py --list
-Law keys: civil, civil-procedure, family, labor, cheque, lease-1376, lease-1376-reg, lease-1362, lease-1356, financial-judgments, civil-enforcement, transfer-anothers-property, registration-mandate, councils-full, reduction-1399, registration, computer-crimes, unemployment-insurance, deeds-regulation, administrative-court, commercial-code, joint-stock-1347, housing-1403, pre-sale, pre-sale-reg, registration-reg, fraud-1367, consumer, third-party-insurance, social-security, direct-taxes, sodagari-1404, ipc, tazirat, cpc, labor-procedure, councils
+Law keys: civil, civil-procedure, family, labor, cheque, lease-1376, lease-1376-reg, lease-1362, lease-1356, financial-judgments, civil-enforcement, transfer-anothers-property, registration-mandate, councils-full, reduction-1399, registration, computer-crimes, unemployment-insurance, deeds-regulation, administrative-court, commercial-code, joint-stock-1347, housing-1403, pre-sale, pre-sale-reg, registration-reg, fraud-1367, consumer, third-party-insurance, social-security, direct-taxes, sodagari-1404, farmland-use-1374, land-reform-reg, ipc, tazirat, cpc, labor-procedure, councils
 """
-import os, re, sys
+import os, re, signal, sys
+
+if hasattr(signal, "SIGPIPE"):
+    signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REF = os.path.join(HERE, "..", "references")
@@ -44,6 +47,8 @@ LAWS = {
     "social-security": "social-security-1354.md",
     "direct-taxes": "direct-taxes.md",
     "sodagari-1404": "sodagari-1404.md",
+    "farmland-use-1374": "farmland-use-1374.md",
+    "land-reform-reg": "land-reform-regulation-1343.md",
     "ipc": "islamic-penal-code-1392.md",
     "tazirat": "tazirat-1375.md",
     "cpc": "criminal-procedure-code-1392.md",
@@ -53,6 +58,14 @@ LAWS = {
 FA = str.maketrans("0123456789", "۰۱۲۳۴۵۶۷۸۹")
 LAT = str.maketrans("۰۱۲۳۴۵۶۷۸۹", "0123456789")
 
+
+
+_LMAP = str.maketrans({"أ": "ا", "إ": "ا", "آ": "ا", "ة": "ه", "ؤ": "و", "ئ": "ی", "ي": "ی", "ك": "ک", "\u0654": None, "\u064b": None, "\u064c": None, "\u064d": None, "\u064e": None, "\u064f": None, "\u0650": None, "\u0651": None, "\u0652": None, "\u0640": None})
+
+
+def loose(s):
+    """Spacing- and spelling-tolerant form for searching: ignores spaces, half-spaces and hamza/diacritic variants."""
+    return re.sub(r"[\s\u200c\u200f\u200e]+", "", s.translate(FA).translate(_LMAP))
 
 def load(key):
     with open(os.path.join(REF, LAWS[key]), encoding="utf-8") as f:
@@ -86,10 +99,14 @@ def main(argv):
             print("--search needs a phrase", file=sys.stderr)
             return 2
         q = argv[2].translate(FA).replace("ي", "ی").replace("ك", "ک")[:200]
-        hits = [a for a in arts if q in a.translate(FA)]
+        lq = loose(q)
+        hits = [a for a in arts if lq and lq in loose(a)]
         for a in hits[:15]:
             title = a.splitlines()[0]
             i = a.translate(FA).find(q)
+            if i < 0:
+                i = a.translate(FA).find(q.split()[0]) if q.split() else 0
+            i = max(i, 0)
             print(f"{title}: …{a[max(0, i - 80):i + 120].strip()}…\n")
         print(f"[{len(hits)} match(es)]")
         return 0
