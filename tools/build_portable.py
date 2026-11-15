@@ -12,7 +12,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 PLUGIN = os.path.join(ROOT, "plugins", "iran-legal-toolkit")
 OUT = os.path.join(ROOT, "portable")
 ORDER = ["iran-legal-core", "iran-civil-litigation", "iran-criminal-procedure",
-         "iran-contracts-deeds", "iran-labor-law", "iran-family-law", "iran-property-lease", "iran-law-texts"]
+         "iran-contracts-deeds", "iran-labor-law", "iran-family-law", "iran-property-lease", "iran-official-letters", "iran-law-texts"]
 FA = str.maketrans("0123456789", "۰۱۲۳۴۵۶۷۸۹")
 
 HEAD = """# جعبه‌ابزار حقوقی ایران، نسخهٔ قابل حمل ({ver})

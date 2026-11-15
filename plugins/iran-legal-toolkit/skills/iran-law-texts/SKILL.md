@@ -39,7 +39,8 @@ description: متن کامل مواد قانونی ایران برای نقل د
 | کلید `unemployment-insurance` | `references/unemployment-insurance-1369.md` | قانون بیمهٔ بیکاری | با اصلاحات |
 | کلید `deeds-regulation` | `references/official-deeds-enforcement-regulation-1387.md` | آیین‌نامهٔ اجرای مفاد اسناد رسمی لازم‌الاجرا (اجرای ثبت) | مصوب ۱۳۸۷ با اصلاحات |
 | کلید `administrative-court` | `references/administrative-court-1402.md` | قانون دیوان عدالت اداری (۱۳۹۰ با اصلاحات ۱۴۰۲) | با اصلاحات ۱۴۰۲ |
-| کلید `commercial-code` | `references/commercial-code-1311.md` | قانون تجارت (اسناد تجاری، شرکت‌ها، ورشکستگی) | با اصلاحات؛ مواد ۳۵۵ و ۳۵۶ در منبع نیست |
+| کلید `commercial-code` | `references/commercial-code-1311.md` | قانون تجارت ۱۳۱۱ (تاجر، شرکت‌های غیرسهامی از مادهٔ ۹۴، برات و سفته از ۲۲۳، ورشکستگی از ۴۱۲) | با اصلاحات؛ مواد ۳۵۵ و ۳۵۶ در منبع نیست |
+| کلید `joint-stock-1347` | `references/joint-stock-1347.md` | لایحهٔ اصلاحی قانون تجارت ۱۳۴۷ (شرکت سهامی، مواد ۱ تا ۳۰۰) | شماره‌گذاری جدا از قانون تجارت |
 | کلید `fraud-1367` | `references/aggravated-fraud-bribery-1367.md` | قانون تشدید مجازات ارتشاء، اختلاس و کلاهبرداری (مادهٔ ۱: کلاهبرداری) | مجازات را با `reduction-1399` تطبیق بده |
 | کلید `housing-1403` | `references/housing-market-1403.md` | قانون ساماندهی بازار زمین، مسکن و اجاره‌بها ۱۴۰۳ | اجرا بسته به آیین‌نامه‌ها |
 | کلید `pre-sale` و `pre-sale-reg` | `references/pre-sale-building-1389.md` و آیین‌نامهٔ ۱۳۹۳ | پیش‌فروش ساختمان | با اصلاحات قانون الزام تطبیق بده |
