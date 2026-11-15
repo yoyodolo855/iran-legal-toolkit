@@ -14,18 +14,19 @@ STAMP = (2026, 1, 1, 0, 0, 0)
 
 
 def add_tree(zf, base, prefix="", skip=lambda rel: False):
-    for dp, dn, fn in sorted(os.walk(base)):
-        dn.sort()
-        for f in sorted(fn):
+    files = []
+    for dp, dn, fn in os.walk(base):
+        for f in fn:
             p = os.path.join(dp, f)
-            rel = os.path.relpath(p, base).replace(os.sep, "/")
-            if skip(rel):
-                continue
-            info = zipfile.ZipInfo(prefix + rel, STAMP)
-            info.compress_type = zipfile.ZIP_DEFLATED
-            info.external_attr = (0o755 if os.access(p, os.X_OK) else 0o644) << 16
-            with open(p, "rb") as fh:
-                zf.writestr(info, fh.read())
+            files.append((os.path.relpath(p, base).replace(os.sep, "/"), p))
+    for rel, p in sorted(files):
+        if skip(rel):
+            continue
+        info = zipfile.ZipInfo(prefix + rel, STAMP)
+        info.compress_type = zipfile.ZIP_DEFLATED
+        info.external_attr = (0o755 if rel.endswith(".py") else 0o644) << 16
+        with open(p, "rb") as fh:
+            zf.writestr(info, fh.read())
 
 
 def main():

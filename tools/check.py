@@ -78,15 +78,24 @@ def check_portable():
             err("portable edition was out of date (rebuilt now; commit the result)")
 
 
+def _content(p):
+    # Compare what is inside a zip, not its compressed bytes: zlib output can
+    # differ between Python builds even when every file inside is identical.
+    if not os.path.exists(p):
+        return None
+    if p.endswith((".zip", ".plugin")):
+        import zipfile
+        with zipfile.ZipFile(p) as zf:
+            return [(i.filename, i.external_attr, zf.read(i)) for i in zf.infolist()]
+    return open(p, "rb").read()
+
+
 def check_dist():
     names = ["iran-legal-toolkit.plugin", "iran-legal-toolkit-portable.md", "laws.zip"]
-    before = {}
-    for n in names:
-        p = os.path.join(ROOT, "dist", n)
-        before[n] = open(p, "rb").read() if os.path.exists(p) else None
+    before = {n: _content(os.path.join(ROOT, "dist", n)) for n in names}
     subprocess.run([sys.executable, "-I", os.path.join(ROOT, "tools", "build_dist.py")], check=True, capture_output=True)
     for n in names:
-        if open(os.path.join(ROOT, "dist", n), "rb").read() != before[n]:
+        if _content(os.path.join(ROOT, "dist", n)) != before[n]:
             err(f"dist/{n} was out of date (rebuilt now; commit the result)")
 
 
