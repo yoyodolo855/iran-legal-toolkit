@@ -5,7 +5,7 @@ Usage:
   find_article.py <law> <number> [<number> ...]   e.g.  find_article.py cpc 49 50
   find_article.py <law> --search "<phrase>"       e.g.  find_article.py tazirat --search "خیانت در امانت"
   find_article.py --list
-Law keys: civil, civil-procedure, family, labor, cheque, lease-1376, lease-1376-reg, lease-1362, lease-1356, financial-judgments, civil-enforcement, transfer-anothers-property, registration-mandate, councils-full, reduction-1399, registration, ipc, tazirat, cpc, labor-procedure, councils
+Law keys: civil, civil-procedure, family, labor, cheque, lease-1376, lease-1376-reg, lease-1362, lease-1356, financial-judgments, civil-enforcement, transfer-anothers-property, registration-mandate, councils-full, reduction-1399, registration, computer-crimes, unemployment-insurance, deeds-regulation, administrative-court, ipc, tazirat, cpc, labor-procedure, councils
 """
 import os, re, sys
 
@@ -28,6 +28,10 @@ LAWS = {
     "councils-full": "dispute-councils-1402.md",
     "reduction-1399": "reduction-of-tazir-imprisonment-1399.md",
     "registration": "registration-law-1310.md",
+    "computer-crimes": "computer-crimes-1388.md",
+    "unemployment-insurance": "unemployment-insurance-1369.md",
+    "deeds-regulation": "official-deeds-enforcement-regulation-1387.md",
+    "administrative-court": "administrative-court-1392.md",
     "ipc": "islamic-penal-code-1392.md",
     "tazirat": "tazirat-1375.md",
     "cpc": "criminal-procedure-code-1392.md",

@@ -27,7 +27,7 @@ HEAD = """# جعبه‌ابزار حقوقی ایران، نسخهٔ قابل ح
 
 1. برای هر پرسش حقوقی یا درخواست نگارش، اول بخش `iran-legal-core/SKILL.md` را دنبال کن، سپس بخش حوزهٔ مربوط را (مدنی، کیفری، قرارداد و سند، کار، خانواده و ارث، ملک و اجاره).
 2. الگوها و فهرست مواد همین فایل را به حافظهٔ خودت ترجیح بده. شمارهٔ ماده، شمارهٔ رأی یا مبلغ نساز. اگر چیزی در فایل نیست و مطمئن نیستی، بگو باید با متن رسمی تطبیق داده شود.
-3. اگر فایل‌های `laws/*.md` (متن کامل قوانین) هم در اختیار توست، برای نقل دقیق ماده فقط همان ماده را در آن‌ها پیدا کن.
+3. اگر فایل‌های `laws/*.md` (متن کامل قوانین) هم در اختیار توست، برای نقل دقیق ماده فقط همان ماده را در آن‌ها پیدا کن. پوشهٔ `laws/rulings/` آرای وحدت رویه و نظریه‌های مشورتی را دارد؛ در آن فقط با واژه جست‌وجو کن و شمارهٔ رأی یا نظریه را فقط از همان‌جا بیاور.
 4. اگر مهلتی در کار است، همان ابتدای پاسخ بگو.
 5. متن حقوقی را کامل، به فارسی رسمی و روشن، با جای خالی در قلاب [ ] تحویل بده؛ بعد فهرست مدارک و قدم بعدی را بنویس.
 6. نتیجه را تضمین نکن. در پرونده‌های سنگین یا وقتی کسی بازداشت است، راه گرفتن وکیل رایگان را نشان بده.
@@ -73,7 +73,12 @@ def main():
     src = os.path.join(PLUGIN, "skills", "iran-law-texts", "references")
     for f in sorted(os.listdir(src)):
         shutil.copy(os.path.join(src, f), os.path.join(laws_out, f))
-    print(f"portable built: {len(parts)-1} sections, {len(os.listdir(laws_out))} law files")
+    rul = os.path.join(PLUGIN, "skills", "iran-law-texts", "rulings")
+    if os.path.isdir(rul):
+        os.makedirs(os.path.join(laws_out, "rulings"))
+        for f in sorted(os.listdir(rul)):
+            shutil.copy(os.path.join(rul, f), os.path.join(laws_out, "rulings", f))
+    print(f"portable built: {len(parts)-1} sections, {len(os.listdir(laws_out))-1} law files + rulings")
 
 
 if __name__ == "__main__":
