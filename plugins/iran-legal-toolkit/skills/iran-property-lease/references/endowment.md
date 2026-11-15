@@ -1,7 +1,6 @@
 # موقوفات (اوقاف)
 
-متن کامل قوانین و آیین‌نامه‌های اوقافی در `iran-law-texts/rulings/awqaf-laws-collection.md` است (بازخوانی نوری). فقط جست‌وجو کن، مثلاً با دستور
-`python3 ../iran-law-texts/scripts/find_ruling.py --search "تبصره" "اجاره" "موقوفه"`.
+متن کامل قوانین و آیین‌نامه‌های اوقافی در `iran-law-texts/rulings/awqaf-laws-collection.md` است (بازخوانی نوری). فقط جست‌وجو کن، مثلاً با دستور `python3 ../iran-law-texts/scripts/find_ruling.py --search "تبصره" "اجاره" "موقوفه"`.
 مواد قانون مدنی را با `find_article.py civil <شماره>` بیرون بکش.
 
 ## قواعد پایه (قانون مدنی، مواد ۵۵ تا ۹۱)
