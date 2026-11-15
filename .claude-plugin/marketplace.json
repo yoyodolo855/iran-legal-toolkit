@@ -1,6 +1,6 @@
 {
   "name": "iran-legal-free",
-  "description": "ابزار حقوقی رایگان و بدون کپی‌رایت برای حقوق ایران",
+  "description": "ابزار حقوقی رایگان برای حقوق ایران (CC BY 4.0، با ذکر نام yoyodolo855)",
   "owner": {"name": "yoyodolo"},
   "plugins": [
     {"name": "iran-legal-toolkit", "source": "./plugins/iran-legal-toolkit", "description": "نگارش دادخواست، شکواییه، لایحه، قرارداد، دعاوی کار، خانواده و ارث برای حقوق ایران"}
