@@ -57,7 +57,7 @@ def load(key):
     with open(os.path.join(REF, LAWS[key]), encoding="utf-8") as f:
         text = f.read()
     head = text.split("\n## ", 1)[0]
-    arts = re.split(r"\n(?=## مادهٔ )", text)[1:]
+    arts = re.split(r"\n(?=## )", text)[1:]
     return head, arts
 
 
