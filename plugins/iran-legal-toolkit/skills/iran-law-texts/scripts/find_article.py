@@ -5,7 +5,7 @@ Usage:
   find_article.py <law> <number> [<number> ...]   e.g.  find_article.py cpc 49 50
   find_article.py <law> --search "<phrase>"       e.g.  find_article.py tazirat --search "خیانت در امانت"
   find_article.py --list
-Law keys: civil, civil-procedure, family, labor, cheque, lease-1376, lease-1376-reg, lease-1362, lease-1356, financial-judgments, civil-enforcement, transfer-anothers-property, registration-mandate, councils-full, reduction-1399, registration, computer-crimes, unemployment-insurance, deeds-regulation, administrative-court, ipc, tazirat, cpc, labor-procedure, councils
+Law keys: civil, civil-procedure, family, labor, cheque, lease-1376, lease-1376-reg, lease-1362, lease-1356, financial-judgments, civil-enforcement, transfer-anothers-property, registration-mandate, councils-full, reduction-1399, registration, computer-crimes, unemployment-insurance, deeds-regulation, administrative-court, commercial-code, housing-1403, pre-sale, pre-sale-reg, registration-reg, fraud-1367, ipc, tazirat, cpc, labor-procedure, councils
 """
 import os, re, sys
 
@@ -32,6 +32,12 @@ LAWS = {
     "unemployment-insurance": "unemployment-insurance-1369.md",
     "deeds-regulation": "official-deeds-enforcement-regulation-1387.md",
     "administrative-court": "administrative-court-1392.md",
+    "commercial-code": "commercial-code-1311.md",
+    "housing-1403": "housing-market-1403.md",
+    "pre-sale": "pre-sale-building-1389.md",
+    "pre-sale-reg": "pre-sale-building-regulation-1393.md",
+    "registration-reg": "registration-law-regulation-1317.md",
+    "fraud-1367": "aggravated-fraud-bribery-1367.md",
     "ipc": "islamic-penal-code-1392.md",
     "tazirat": "tazirat-1375.md",
     "cpc": "criminal-procedure-code-1392.md",

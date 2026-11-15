@@ -38,6 +38,11 @@ description: متن کامل مواد قانونی ایران برای نقل د
 | کلید `unemployment-insurance` | `references/unemployment-insurance-1369.md` | قانون بیمهٔ بیکاری | با اصلاحات |
 | کلید `deeds-regulation` | `references/official-deeds-enforcement-regulation-1387.md` | آیین‌نامهٔ اجرای مفاد اسناد رسمی لازم‌الاجرا (اجرای ثبت) | مصوب ۱۳۸۷ با اصلاحات |
 | کلید `administrative-court` | `references/administrative-court-1392.md` | قانون تشکیلات و آیین دادرسی دیوان عدالت اداری ۱۳۹۲ | **بدون اصلاحات ۱۴۰۲**؛ مهلت و صلاحیت را تطبیق بده |
+| کلید `commercial-code` | `references/commercial-code-1311.md` | قانون تجارت (اسناد تجاری، شرکت‌ها، ورشکستگی) | با اصلاحات؛ مواد ۳۵۵ و ۳۵۶ در منبع نیست |
+| کلید `fraud-1367` | `references/aggravated-fraud-bribery-1367.md` | قانون تشدید مجازات ارتشاء، اختلاس و کلاهبرداری (مادهٔ ۱: کلاهبرداری) | مجازات را با `reduction-1399` تطبیق بده |
+| کلید `housing-1403` | `references/housing-market-1403.md` | قانون ساماندهی بازار زمین، مسکن و اجاره‌بها ۱۴۰۳ | اجرا بسته به آیین‌نامه‌ها |
+| کلید `pre-sale` و `pre-sale-reg` | `references/pre-sale-building-1389.md` و آیین‌نامهٔ ۱۳۹۳ | پیش‌فروش ساختمان | با اصلاحات قانون الزام تطبیق بده |
+| کلید `registration-reg` | `references/registration-law-regulation-1317.md` | آیین‌نامهٔ قانون ثبت | با اصلاحات |
 | کلید `family` | `references/family-protection-1391.md` | قانون حمایت خانواده ۱۳۹۱ (دادگاه خانواده، مهریه، ثبت طلاق، حضانت) | متن مصوب ۱۳۹۱ |
 | کلید `ipc` | `references/islamic-penal-code-1392.md` | قانون مجازات اسلامی ۱۳۹۲ (کتاب‌های ۱ تا ۴) | متن پیش از اصلاحات ۱۳۹۹ و ۱۴۰۳ |
 | کلید `tazirat` | `references/tazirat-1375.md` | کتاب پنجم: تعزیرات ۱۳۷۵ | متن پیش از ۱۳۹۹؛ جرایم رایانه‌ای را ندارد |
