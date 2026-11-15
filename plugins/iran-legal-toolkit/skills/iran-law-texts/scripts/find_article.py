@@ -5,7 +5,7 @@ Usage:
   find_article.py <law> <number> [<number> ...]   e.g.  find_article.py cpc 49 50
   find_article.py <law> --search "<phrase>"       e.g.  find_article.py tazirat --search "خیانت در امانت"
   find_article.py --list
-Law keys: civil, civil-procedure, family, labor, cheque, lease-1376, lease-1376-reg, lease-1362, lease-1356, financial-judgments, civil-enforcement, transfer-anothers-property, registration-mandate, councils-full, reduction-1399, registration, computer-crimes, unemployment-insurance, deeds-regulation, administrative-court, commercial-code, joint-stock-1347, housing-1403, pre-sale, pre-sale-reg, registration-reg, fraud-1367, consumer, third-party-insurance, social-security, direct-taxes, sodagari-1404, farmland-use-1374, land-reform-reg, civil-liability, narcotics, arms, smuggling, armed-forces, youth-population, municipality, vat, registration-text, pazireh, ipc, tazirat, cpc, labor-procedure, councils
+Law keys: civil, civil-procedure, family, labor, cheque, lease-1376, lease-1376-reg, lease-1362, lease-1356, financial-judgments, civil-enforcement, transfer-anothers-property, registration-mandate, councils-full, reduction-1399, registration, computer-crimes, unemployment-insurance, deeds-regulation, administrative-court, commercial-code, joint-stock-1347, housing-1403, pre-sale, pre-sale-reg, registration-reg, fraud-1367, consumer, third-party-insurance, social-security, direct-taxes, sodagari-1404, farmland-use-1374, land-reform-reg, civil-liability, narcotics, arms, smuggling, armed-forces, youth-population, municipality, vat, registration-text, pazireh, constitution, non-contentious, partition, pos-terminals, e-notification, ipc, tazirat, cpc, labor-procedure, councils
 """
 import os, re, signal, sys
 
@@ -59,6 +59,11 @@ LAWS = {
     "vat": "vat-1400.md",
     "registration-text": "registration-law-1310-text.md",
     "pazireh": "pazireh-regulation-1365.md",
+    "constitution": "constitution.md",
+    "non-contentious": "non-contentious-1319.md",
+    "partition": "partition-1357.md",
+    "pos-terminals": "pos-terminals-1398.md",
+    "e-notification": "e-notification-1395.md",
     "ipc": "islamic-penal-code-1392.md",
     "tazirat": "tazirat-1375.md",
     "cpc": "criminal-procedure-code-1392.md",
@@ -130,7 +135,7 @@ def main(argv):
             alt = str(int(num.translate(LAT)) + 728).translate(FA)
             print(f"(مادهٔ {num} قانون جرایم رایانه‌ای = مادهٔ {alt} تعزیرات)\n")
             num = alt
-        want = f"## مادهٔ {num}"
+        want = f"## مادهٔ {num}" if key != "constitution" else f"## اصل {num}"
         for a in arts:
             first = a.splitlines()[0].strip()
             if first == want or first.startswith(want + " مکرر"):
