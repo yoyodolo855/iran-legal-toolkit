@@ -5,7 +5,7 @@ Usage:
   find_article.py <law> <number> [<number> ...]   e.g.  find_article.py cpc 49 50
   find_article.py <law> --search "<phrase>"       e.g.  find_article.py tazirat --search "خیانت در امانت"
   find_article.py --list
-Law keys: civil, civil-procedure, family, labor, cheque, lease-1376, lease-1376-reg, lease-1362, lease-1356, financial-judgments, civil-enforcement, transfer-anothers-property, registration-mandate, councils-full, reduction-1399, registration, computer-crimes, unemployment-insurance, deeds-regulation, administrative-court, commercial-code, joint-stock-1347, housing-1403, pre-sale, pre-sale-reg, registration-reg, fraud-1367, consumer, third-party-insurance, social-security, direct-taxes, sodagari-1404, farmland-use-1374, land-reform-reg, ipc, tazirat, cpc, labor-procedure, councils
+Law keys: civil, civil-procedure, family, labor, cheque, lease-1376, lease-1376-reg, lease-1362, lease-1356, financial-judgments, civil-enforcement, transfer-anothers-property, registration-mandate, councils-full, reduction-1399, registration, computer-crimes, unemployment-insurance, deeds-regulation, administrative-court, commercial-code, joint-stock-1347, housing-1403, pre-sale, pre-sale-reg, registration-reg, fraud-1367, consumer, third-party-insurance, social-security, direct-taxes, sodagari-1404, farmland-use-1374, land-reform-reg, civil-liability, narcotics, arms, smuggling, armed-forces, youth-population, municipality, vat, registration-text, pazireh, ipc, tazirat, cpc, labor-procedure, councils
 """
 import os, re, signal, sys
 
@@ -49,6 +49,16 @@ LAWS = {
     "sodagari-1404": "sodagari-1404.md",
     "farmland-use-1374": "farmland-use-1374.md",
     "land-reform-reg": "land-reform-regulation-1343.md",
+    "civil-liability": "civil-liability-1339.md",
+    "narcotics": "narcotics-1367.md",
+    "arms": "arms-smuggling-1390.md",
+    "smuggling": "smuggling-goods-currency-1392.md",
+    "armed-forces": "armed-forces-crimes-1382.md",
+    "youth-population": "youth-population-1400.md",
+    "municipality": "municipality-1334.md",
+    "vat": "vat-1400.md",
+    "registration-text": "registration-law-1310-text.md",
+    "pazireh": "pazireh-regulation-1365.md",
     "ipc": "islamic-penal-code-1392.md",
     "tazirat": "tazirat-1375.md",
     "cpc": "criminal-procedure-code-1392.md",
@@ -123,7 +133,7 @@ def main(argv):
         want = f"## مادهٔ {num}"
         for a in arts:
             first = a.splitlines()[0].strip()
-            if first == want or first == want + " مکرر":
+            if first == want or first.startswith(want + " مکرر"):
                 print(a.strip() + "\n")
                 found = True
     if not found:
